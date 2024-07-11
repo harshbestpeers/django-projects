@@ -1,0 +1,38 @@
+{% extends "master.html" %}
+
+{% block content %}
+<style>
+  .content {
+    max-width: 500px;
+    margin: auto;
+
+  }
+</style>
+
+
+<div class="content">
+  <form action="{% url 'update' id=mydata.id %}" method="post"> {% csrf_token %}
+    <div class="form-group">
+      <label for="firstname" id="text">Firstname : </label>
+      <input type="text" id="firstname" name="firstname" value={{mydata.firstname}}>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="lastname" id="text">Lastname :</label>
+      <input type="text" id="lastname" name="lastname" value={{mydata.lastname}}>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="phone" id="text">Mobile no. :</label>
+      <input type="phone" id="phone" name="phone" value={{mydata.phone}}>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="date" id="text">Joined Date :</label>
+      <input type="date" id="date" name="date" value={{mydata.joined_date}}>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">update</button>
+  </form>
+</div>
+{% endblock %}
