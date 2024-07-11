@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.http import HttpResponse
 from django.template import loader
-from .models import members
+from .models import members, user
 from django.views import View
 
 # Create your views here.
@@ -11,12 +12,6 @@ class Main(View):
     def get(self, request):
         template = loader.get_template("index.html")
         return HttpResponse(template.render())
-
-
-class Logout(View):
-    def get(self, request):
-        logout(request)
-        return redirect("login")
 
 
 class Edit(View):
@@ -77,3 +72,37 @@ class AddMember(View):
         mydata = members.objects.all().values()
         context = {"mydata": mydata}
         return render(request, "members.html", context)
+
+
+class SignUp(View):
+    def get(self, request):
+        return render(request, "signin_and_signup/sign_up.html")
+
+    def post(self, request):
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+        if password1 == password2 :
+            userdata = user(
+            name=name, email=email, password=password1)
+            userdata.save()
+            return render(request, "signin.html")
+        else:
+            messages.error(request,'password is not same')
+            return render(request, "signin_and_signup/sign_up.html")
+
+
+class SignIn(View):
+    def get(self, request):
+        return render(request, "signin_and_signup/sign_in.html")
+
+    def post(self, request):
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user_is_valid = user.objects.filter(email=email, password=password).values()
+        if len(user_is_valid) > 0:
+            return render(request, "index.html")
+
+        else:
+            return render(request, "signin_and_signup/sign_in.html")
