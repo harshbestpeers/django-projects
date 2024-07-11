@@ -11,4 +11,6 @@ urlpatterns = [
     path("curd_operation/", CurdOperation.as_view(), name="curd"),
     path("edit/<int:id>/", Edit.as_view(), name="edit"),
     path("AddMember/", AddMember.as_view(), name="add"),
+    path("SignUp/", SignUp.as_view(), name="signup"),
+    path("SignIn/", SignIn.as_view(), name="signin"),
 ]

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import members
+from .models import members, user
 
 # Register your models here.
 class MemberAdmin(admin.ModelAdmin):
@@ -7,3 +7,4 @@ class MemberAdmin(admin.ModelAdmin):
 
 
 admin.site.register(members, MemberAdmin)
+admin.site.register(user)
