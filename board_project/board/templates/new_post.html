@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Start a New post{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'board' %}">Boards</a></li>
+<li class="breadcrumb-item"><a href="">{{ topic.board.name }}</a></li>
+<li class="breadcrumb-item active">{{ topic.subject }}</li>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3 ">
+    <div class="mb-4">
+        <a href="{% url 'reply_post' id=topic.id %}" class="btn btn-primary">Reply</a>
+    </div>
+</div>
+
+{% for x in posts %}
+<div class="card border-dark" >
+    <div class="container ">
+        <p>Created_by : {{x.created_by.username}}</p>
+        <h4><b style="font-family: sans-serif">{{x.message}}</b></h4>
+        <p></p>
+
+
+    </div>
+</div>
+<br>
+{% endfor %}
+{% endblock content %}
