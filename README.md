@@ -1,1 +1,1 @@
-# django-projects
+myvenv/

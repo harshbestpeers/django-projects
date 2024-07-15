@@ -6,10 +6,6 @@ from django.contrib.auth.models import User
 from django.db.models import Count, Max
 from .forms import NewTopicForm, ReplyPostForm
 
-# Create your views here.
-class Main(View):
-    def get(self, request):
-        return render(request, "home.html")
 
 
 class Board_main(View):
