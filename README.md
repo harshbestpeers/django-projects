@@ -1,2 +1,1 @@
-# django-projects
-temp/myvenv
+myvenv/
