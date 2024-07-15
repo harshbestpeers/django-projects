@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Board(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField("board_ name", max_length=30, unique=True)
     description = models.CharField(max_length=100)
 
     class Meta:
@@ -26,3 +26,16 @@ class Post(models.Model):
     updated_by = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, related_name="+"
     )
+
+
+from django.db import models
+from django.contrib.postgres.indexes import GinIndex
+
+class Employee(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    hire_date = models.DateField()
+    tags = models.CharField(max_length=100)
+
+    
